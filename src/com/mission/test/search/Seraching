@@ -1,0 +1,20 @@
+Different strategies of searching are
+
+1) Brute force - usually provides solution with maximum complexity and does not yield optimal solution
+2) Sort and search. The searching could be linear or binary
+3) Hashing technique - needs extra space for hash table
+4) Clever method based on restrictions on the data
+5) XOR data
+
+Different specific types
+
+1) Binary search tree
+2) Patter searching algorithms for string
+3) Trie
+
+Union and Intersection
+----------------------
+1) Naive approach
+2) Sort both arrays and iterate both
+3) Sort smaller array and for every element of larger array, do binary search in smaller array
+4) Use hash table

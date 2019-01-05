@@ -1,0 +1,33 @@
+Mean, Median and Mode are three kinds of averages. 
+
+The mean is the average, where we add up all numbers and then divide by the number of numbers. The median is the 
+middle value in the list of numbers. To find the the median the numbers must be in the numerical order, so we may
+need to rewrite the list of numbers. The mode is the value that occurs most often. If no number is repeated then 
+there is no mode for the list.
+
+The range is just the difference between the largest and smallest numbers of the list.
+
+In short, 
+Mean : regular meaning of "average"
+Median : middle value (in a sorted list of numbers)
+Mode : most often
+
+If the given list has odd number of elements, then median is the middle number. If the list has even number of 
+elements then median is the mean of the middle two values.
+
+E.g.
+
+for list 1, 2, 4, 7
+Mean : (1 + 2 + 4 + 7) / 4 = 3.5
+Median : (2 + 4) / 2 = 3
+Mode : none
+
+for list 8, 9, 10, 10, 11, 11, 11, 12, 13
+Mean : (8 + 9 + 10 + 10 + 11 + 11 + 11 + 12 + 13) / 9 = 95 / 9 = 10.56
+Median : 11 (5th element in the list of 9 elements)
+Mode : 11
+
+Median = (total number of elements + 1) / 2   : for odd elements
+
+Technically median denotes a value lying at the midpoint of a frequency distribution of observed values, such that
+there is an equal probability of falling above or below it

@@ -1,0 +1,20 @@
+Generally DP problems try to evaluate local minima or maxima for the problem.
+e.g. longest common subsequence, minimum number of coins for change, maximum value for knapsack
+
+DP problems have following properties
+1) Optimal substructure
+   Solution to the subproblem constitute to the solution of the main problem
+2) Overlapping subproblems
+   Same subproblems are getting evaluated again and again
+   
+DP problems can be solved 
+1) by Top Down approach (Memoization)
+2) by Bottom Up approach (Dynamic Programming)
+
+Trick:
+1) Find out varying things. They become the dimensions of memopad 
+	e.g. Total value for the change, denomination value  
+2) The answer we have to give out becomes the value of the memopad 
+	e.g. Number of coins at any stage
+	
+Provide special attention to the base case (i == 0 or j == 0 of the array)

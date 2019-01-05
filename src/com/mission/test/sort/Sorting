@@ -1,0 +1,6 @@
+Stable sorting - A stable sort is one where the initial order of equal items is preserved.
+				 e.g. Sorting of words "apple", "tree", "pink" by length of the strings
+				 "tree", "pink", "apple"   --> Stable
+				 "pink", "tree", "apple"   --> Not stable since initial order of tree and pink is changed
+				 
+Stable sorting is important if sorting is to be done on multiple fields. e.g. Merge sort

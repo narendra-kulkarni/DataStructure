@@ -1,0 +1,10 @@
+Selection algorithm is an algorithm which finds kth smallest/largest number from the list of data. This is also
+called as finding kth order statistics.
+
+Finding minimum/maximum, medians, nearest neighbors are all come under this category.
+
+Various ways for selection
+1) Sort and select
+2) Partial sort
+3) Partitioning algorithm (Quick select)
+ 
