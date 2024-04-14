@@ -8,7 +8,7 @@ public class UndirectedGraph {
 
 	private int vertices;
 
-	private List<Integer> adj[];
+	private List<Integer>[] adj;
 
 	@SuppressWarnings("unchecked")
 	public UndirectedGraph(int num) {
