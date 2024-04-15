@@ -64,9 +64,7 @@ public class CharacterOrder {
 		private void topologicalSortUtil(int src, boolean[] visited, Stack<Integer> stack) {
 			visited[src] = true;
 
-			Iterator<Integer> itr = adajacencies[src].iterator();
-			while (itr.hasNext()) {
-				int adjacent = itr.next();
+			for(int adjacent : adajacencies[src]) {
 				if (!visited[adjacent])
 					topologicalSortUtil(adjacent, visited, stack);
 			}

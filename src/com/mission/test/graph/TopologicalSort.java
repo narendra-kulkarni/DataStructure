@@ -49,9 +49,7 @@ public class TopologicalSort {
 
 	private void topologicalSort(int i, boolean[] visited, Stack<Integer> stack) {
 		visited[i] = true;
-		Iterator<Integer> itr = adj[i].iterator();
-		while (itr.hasNext()) {
-			int adjacent = itr.next();
+		for (int adjacent : adj[i]) {
 			if (!visited[adjacent])
 				topologicalSort(adjacent, visited, stack);
 		}
@@ -61,6 +59,7 @@ public class TopologicalSort {
 		stack.push(i);
 	}
 
+	// Backtracking solution
 	public void allTopologicalSort() {
 		boolean[] visited = new boolean[vertices];
 		List<Integer> list = new ArrayList<>();

@@ -23,10 +23,12 @@ public class DirectedGraph {
 		adj[from].add(to);
 	}
 
-	public void dfsRecursive(int start) {
+	public void dfsRecursive() {
 		boolean[] visited = new boolean[vertices];
-		if (!visited[start])
-			dfsUtil(start, visited);
+		for (int i = 0; i < vertices; i++) {
+			if (!visited[i])
+				dfsUtil(i, visited);
+		}
 	}
 
 	private void dfsUtil(int i, boolean[] visited) {
@@ -70,14 +72,16 @@ public class DirectedGraph {
 		return false;
 	}
 
+	// why visisted is not enough and we need recursion array as well? -> consider
+	// a veretx which has indegree more than 1 from two separate branches
+	// A -> B <- c
+	// We should ensure that dfs branch (recursion stack) does not encounter the same
+	// vertext again
 	private boolean isCyclic(int vertex, boolean[] visited, boolean[] recStack) {
 		visited[vertex] = true;
 		recStack[vertex] = true;
 
-		Iterator<Integer> itr = adj[vertex].iterator();
-		while (itr.hasNext()) {
-			int i = itr.next();
-
+		for (int i : adj[vertex]) {
 			if (!visited[i] && isCyclic(i, visited, recStack))
 				return true;
 			else if (recStack[i])
@@ -92,11 +96,11 @@ public class DirectedGraph {
 		DirectedGraph g = new DirectedGraph(4);
 		g.addEdge(0, 1);
 		g.addEdge(0, 2);
-		g.addEdge(1, 2);
-		g.addEdge(2, 0);
+		//g.addEdge(1, 2);
+		//g.addEdge(2, 0);
 		g.addEdge(2, 3);
-		g.addEdge(3, 3);
-		g.dfsRecursive(2);
+		//g.addEdge(3, 3);
+		g.dfsRecursive();
 		System.out.println();
 		g.dfsIterative(2);
 		System.out.println();
