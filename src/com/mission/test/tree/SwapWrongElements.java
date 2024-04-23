@@ -41,6 +41,15 @@ public class SwapWrongElements {
 		}
 	}
 
+	/****************************************************/
+
+	public static void main(String[] args) {
+		SwapWrongElements h = new SwapWrongElements();
+		h.createBinaryTree();
+		h.swapWrongElements();
+		h.inorder();
+	}
+
 	private class Node {
 		int data;
 		Node left;
@@ -70,12 +79,5 @@ public class SwapWrongElements {
 			System.out.print(root.data + " ");
 			inorder(root.right);
 		}
-	}
-
-	public static void main(String[] args) {
-		SwapWrongElements h = new SwapWrongElements();
-		h.createBinaryTree();
-		h.swapWrongElements();
-		h.inorder();
 	}
 }

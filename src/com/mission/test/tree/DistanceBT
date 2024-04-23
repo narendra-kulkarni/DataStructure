@@ -1,1 +1,0 @@
-Distance between two nodes = distance of node1 from root + distance of node2 from root - 2 * lca(node1, node2)

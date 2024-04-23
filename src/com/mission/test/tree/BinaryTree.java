@@ -41,6 +41,7 @@ public class BinaryTree {
 		System.out.println("LCA of 1, 8 -> " + (h.lca_bst(root, 1, 8)).data);
 		System.out.println("Diameter of the tree -> " + (h.diameter(root)));
 		System.out.println("Closest to 7 is -> " + h.closestBST(root, 7).data);
+		System.out.println("Width of the tree : " + h.width(root));
 		h.serialize(root);
 	}
 
@@ -276,18 +277,43 @@ public class BinaryTree {
 		return root;
 	}
 
-	// This wrapper is required since in java two values can not be returned
-	// back and also it does not have
-	// pass by reference.
-	private class HeightWrapper {
-		int height;
+	/************Height********Width********Diameter********************/
 
-		public HeightWrapper() {
-			height = 0;
+	// Height or max depth of the tree
+	public int height(Node root) {
+		if (root == null)
+			return 0;
+
+		return Math.max(height(root.left), height(root.right)) + 1;
+	}
+
+	// width of the tree
+	public int width(Node root) {
+		if (root == null)
+			return 0;
+
+		int width = Integer.MIN_VALUE;
+		Queue<Node> q = new LinkedList<>();
+		q.offer(root);
+
+		while (!q.isEmpty()) {
+			int count = q.size();
+			width = Math.max(width, count);
+
+			for (int i = 0; i < count; i++) {
+				Node temp = q.poll();
+				if (temp.left != null)
+					q.offer(temp.left);
+				if (temp.right != null)
+					q.offer(temp.right);
+			}
 		}
+
+		return width;
 	}
 
 	// Diameter is the distance between the two farthest nodes in the tree.
+	// These nodes may or may not go through the root.
 	// So, Diameter = Max (Diameter of left subtree, Diameter of right subtree,
 	// left height + right height + 1)
 	// This can be calculated in n square time. If height and diameter is
@@ -310,11 +336,27 @@ public class BinaryTree {
 
 		int ld = diameter(root.left, lh);
 		int rd = diameter(root.right, rh);
-		int rootd = lh.height + rh.height + 1;
+		int rootD = lh.height + rh.height + 1;
 		h.height = Math.max(lh.height, rh.height) + 1;
 
-		return Math.max(rootd, Math.max(ld, rd));
+		return Math.max(rootD, Math.max(ld, rd));
 	}
+
+	// This wrapper is required since in java two values can not be returned
+	// back and also it does not have
+	// pass by reference.
+	private class HeightWrapper {
+		int height;
+
+		public HeightWrapper() {
+			height = 0;
+		}
+	}
+
+	// Distance between two nodes =
+	// distance of node1 from root + distance of node2 from root - 2 * lca(node1, node2)
+
+	/****************************************************************************/
 
 	/** BT to DLL */
 	public Node bintree2list(Node node) {
