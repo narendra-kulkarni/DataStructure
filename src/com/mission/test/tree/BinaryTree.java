@@ -4,57 +4,6 @@ import java.util.*;
 
 public class BinaryTree {
 
-	static Node root;
-
-	static Node prev;
-
-	public static void main(String[] args) {
-		BinaryTree h = new BinaryTree();
-		root = h.new Node(4);
-		root.left = h.new Node(2);
-		root.right = h.new Node(8);
-		root.left.left = h.new Node(1);
-		root.left.right = h.new Node(3);
-		root.left.left.left = h.new Node(9);
-		h.verticalSum(root);
-		h.reverseInorder(root);
-		System.out.println();
-		h.iterativeInorder(root);
-		System.out.println();
-		h.iterativePreorder(root);
-		System.out.println();
-		h.iterativePostorder(root);
-		h.mirrorPost(root);
-		System.out.println();
-		h.inorder(root);
-		System.out.println();
-		h.mirrorPre(root);
-		h.inorder(root);
-		System.out.println();
-		h.level(root);
-		System.out.println();
-		System.out.println("Level of 1 is : " + h.getLevel(root, 1, 0));
-		System.out.println(h.isSymmetric(root, root));
-		System.out.println(h.isBST(root) ? "Is BST" : "Is not BST");
-		System.out.println("LCA of 1, 8 -> " + (h.lca(root, 1, 8)).data);
-		System.out.println("LCA of 2, 3 -> " + (h.lca(root, 2, 3)).data);
-		System.out.println("LCA of 1, 8 -> " + (h.lca_bst(root, 1, 8)).data);
-		System.out.println("Diameter of the tree -> " + (h.diameter(root)));
-		System.out.println("Closest to 7 is -> " + h.closestBST(root, 7).data);
-		System.out.println("Width of the tree : " + h.width(root));
-		h.serialize(root);
-	}
-
-	class Node {
-		int data;
-		Node left;
-		Node right;
-
-		Node(int data) {
-			this.data = data;
-		}
-	}
-
 	public void mirrorPost(Node root) {
 		if (root != null) {
 			mirrorPost(root.left);
@@ -246,6 +195,26 @@ public class BinaryTree {
 				&& isBST(root.right, root.data, max));
 	}
 
+	// Returns the closest element to the given value
+	public Node closestBST(Node root, int val) {
+		if (root.data == val)
+			return root;
+
+		if (val < root.data) {
+			if (root.left == null)
+				return root;
+			Node p = closestBST(root.left, val);
+			return Math.abs(p.data - val) > Math.abs(root.data - val) ? root : p;
+		}
+
+		else {
+			if (root.right == null)
+				return root;
+			Node p = closestBST(root.right, val);
+			return Math.abs(p.data - val) > Math.abs(root.data - val) ? root : p;
+		}
+	}
+
 	// Assumption : Both the values are present in the tree
 	public Node lca(Node root, int val1, int val2) {
 		if (root == null)
@@ -310,6 +279,46 @@ public class BinaryTree {
 		}
 
 		return width;
+	}
+
+	// Width variation: The width of one level is defined as the length between
+	// the end-nodes (the leftmost and rightmost non-null nodes), where the null nodes
+	// between the end-nodes that would be present in a complete binary tree extending
+	// down to that level are also counted into the length calculation.
+
+	public int widthOfBinaryTree(Node root) {
+		if (root == null)
+			return 0;
+
+		int width = Integer.MIN_VALUE;
+		LinkedList<Pair> q = new LinkedList<>();
+		q.add(new Pair(root, 0));
+
+		while (!q.isEmpty()) {
+			int count = q.size();
+			width = Math.max(width, q.getLast().index - q.getFirst().index + 1);
+
+			for (int i = 0; i < count; i++) {
+				Pair temp = q.remove();
+
+				if (temp.node.left != null)
+					q.add(new Pair(temp.node.left, (2 * temp.index) + 1));
+				if (temp.node.right != null)
+					q.add(new Pair(temp.node.right, (2 * temp.index) + 2));
+			}
+		}
+
+		return width;
+	}
+
+	private class Pair {
+		Node node;
+		int index;
+
+		Pair(Node node, int index) {
+			this.node = node;
+			this.index = index;
+		}
 	}
 
 	// Diameter is the distance between the two farthest nodes in the tree.
@@ -421,26 +430,6 @@ public class BinaryTree {
 		return node;
 	}
 
-	// Returns the closest element to the given value
-	public Node closestBST(Node root, int val) {
-		if (root.data == val)
-			return root;
-
-		if (val < root.data) {
-			if (root.left == null)
-				return root;
-			Node p = closestBST(root.left, val);
-			return Math.abs(p.data - val) > Math.abs(root.data - val) ? root : p;
-		}
-
-		else {
-			if (root.right == null)
-				return root;
-			Node p = closestBST(root.right, val);
-			return Math.abs(p.data - val) > Math.abs(root.data - val) ? root : p;
-		}
-	}
-
 	public void verticalSum(Node root) {
 		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
 		verticalSum(root, 0, map);
@@ -526,5 +515,58 @@ public class BinaryTree {
 			return node;
 		}
 		return null;
+	}
+
+	/**********************************************************************/
+
+	static Node root;
+
+	static Node prev;
+
+	public static void main(String[] args) {
+		BinaryTree h = new BinaryTree();
+		root = h.new Node(4);
+		root.left = h.new Node(2);
+		root.right = h.new Node(8);
+		root.left.left = h.new Node(1);
+		root.left.right = h.new Node(3);
+		root.left.left.left = h.new Node(9);
+		h.verticalSum(root);
+		h.reverseInorder(root);
+		System.out.println();
+		h.iterativeInorder(root);
+		System.out.println();
+		h.iterativePreorder(root);
+		System.out.println();
+		h.iterativePostorder(root);
+		h.mirrorPost(root);
+		System.out.println();
+		h.inorder(root);
+		System.out.println();
+		h.mirrorPre(root);
+		h.inorder(root);
+		System.out.println();
+		h.level(root);
+		System.out.println();
+		System.out.println("Level of 1 is : " + h.getLevel(root, 1, 0));
+		System.out.println(h.isSymmetric(root, root));
+		System.out.println(h.isBST(root) ? "Is BST" : "Is not BST");
+		System.out.println("LCA of 1, 8 -> " + (h.lca(root, 1, 8)).data);
+		System.out.println("LCA of 2, 3 -> " + (h.lca(root, 2, 3)).data);
+		System.out.println("LCA of 1, 8 -> " + (h.lca_bst(root, 1, 8)).data);
+		System.out.println("Diameter of the tree -> " + (h.diameter(root)));
+		System.out.println("Closest to 7 is -> " + h.closestBST(root, 7).data);
+		System.out.println("Width of the tree : " + h.width(root));
+		h.serialize(root);
+	}
+
+	class Node {
+		int data;
+		Node left;
+		Node right;
+
+		Node(int data) {
+			this.data = data;
+		}
 	}
 }
