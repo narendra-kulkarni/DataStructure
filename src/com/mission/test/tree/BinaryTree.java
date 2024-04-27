@@ -246,6 +246,24 @@ public class BinaryTree {
 		return root;
 	}
 
+	public void verticalSum(Node root) {
+		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
+		verticalSum(root, 0, map);
+		for (int temp : map.keySet())
+			System.out.println("Sum for vertical line " + temp + " is : " + map.get(temp));
+	}
+
+	private void verticalSum(Node root, int level, Map<Integer, Integer> map) {
+		if (root != null) {
+			int data = root.data;
+			if (map.get(level) != null)
+				data += map.get(level);
+			map.put(level, data);
+			verticalSum(root.left, level - 1, map);
+			verticalSum(root.right, level + 1, map);
+		}
+	}
+
 	/************Height********Width********Diameter********************/
 
 	// Height or max depth of the tree
@@ -368,83 +386,30 @@ public class BinaryTree {
 	/****************************************************************************/
 
 	/** BT to DLL */
-	public Node bintree2list(Node node) {
-		// Base case
-		if (node == null) {
-			return node;
+	private Node previous = null;
+
+	public Node treeToDll(Node root) {
+		if (root == null)
+			return root;
+
+		Node head = treeToDll(root.left);
+
+		if (previous == null) {
+			head = root;
+		} else {
+			previous.right = root;
+			root.left = previous;
 		}
+		previous = root;
 
-		// Convert to DLL using bintree2listUtil()
-		node = bintree2listUtil(node);
-
-		// bintree2listUtil() returns root node of the converted
-		// DLL. We need pointer to the leftmost node which is
-		// head of the constructed DLL, so move to the leftmost node
-		while (node.left != null) {
-			node = node.left;
-		}
-
-		return node;
+		treeToDll(root.right);
+		return head;
 	}
 
-	private Node bintree2listUtil(Node node) {
-		// Base case
-		if (node == null) {
-			return node;
-		}
-
-		// Convert the left subtree and link to root
-		if (node.left != null) {
-			// Convert the left subtree
-			Node left = bintree2listUtil(node.left);
-
-			// Find inorder predecessor. After this loop, left
-			// will point to the inorder predecessor
-			while (left.right != null)
-				left = left.right;
-
-			// Make root as next of the predecessor
-			left.right = node;
-
-			// Make predecessor as previous of root
-			node.left = left;
-		}
-
-		// Convert the right subtree and link to root
-		if (node.right != null) {
-			// Convert the right subtree
-			Node right = bintree2listUtil(node.right);
-
-			// Find inorder successor. After this loop, right
-			// will point to the inorder successor
-			while (right.left != null)
-				right = right.left;
-
-			// Make root as previous of successor
-			right.left = node;
-
-			// Make successor as next of root
-			node.right = right;
-		}
-
-		return node;
-	}
-
-	public void verticalSum(Node root) {
-		Map<Integer, Integer> map = new TreeMap<Integer, Integer>();
-		verticalSum(root, 0, map);
-		for (int temp : map.keySet())
-			System.out.println("Sum for vertical line " + temp + " is : " + map.get(temp));
-	}
-
-	private void verticalSum(Node root, int level, Map<Integer, Integer> map) {
-		if (root != null) {
-			int data = root.data;
-			if (map.get(level) != null)
-				data += map.get(level);
-			map.put(level, data);
-			verticalSum(root.left, level - 1, map);
-			verticalSum(root.right, level + 1, map);
+	void printList(Node node) {
+		while (node != null) {
+			System.out.print(node.data + " ");
+			node = node.right;
 		}
 	}
 
@@ -558,6 +523,9 @@ public class BinaryTree {
 		System.out.println("Closest to 7 is -> " + h.closestBST(root, 7).data);
 		System.out.println("Width of the tree : " + h.width(root));
 		h.serialize(root);
+		System.out.println("Tree to DLL : ");
+		Node head = h.treeToDll(root);
+		h.printList(head);
 	}
 
 	class Node {
