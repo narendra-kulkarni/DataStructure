@@ -4,26 +4,6 @@ import java.util.*;
 
 public class BinaryTree {
 
-	public void mirrorPost(Node root) {
-		if (root != null) {
-			mirrorPost(root.left);
-			mirrorPost(root.right);
-			Node temp = root.left;
-			root.left = root.right;
-			root.right = temp;
-		}
-	}
-
-	public void mirrorPre(Node root) {
-		if (root != null) {
-			Node temp = root.left;
-			root.left = root.right;
-			root.right = temp;
-			mirrorPre(root.left);
-			mirrorPre(root.right);
-		}
-	}
-
 	public void inorder(Node root) {
 		if (root != null) {
 			inorder(root.left);
@@ -141,6 +121,26 @@ public class BinaryTree {
 			return lev;
 
 		return getLevel(root.right, key, level + 1);
+	}
+
+	public void mirrorPost(Node root) {
+		if (root != null) {
+			mirrorPost(root.left);
+			mirrorPost(root.right);
+			Node temp = root.left;
+			root.left = root.right;
+			root.right = temp;
+		}
+	}
+
+	public void mirrorPre(Node root) {
+		if (root != null) {
+			Node temp = root.left;
+			root.left = root.right;
+			root.right = temp;
+			mirrorPre(root.left);
+			mirrorPre(root.right);
+		}
 	}
 
 	public boolean isSymmetric(Node root1, Node root2) {
