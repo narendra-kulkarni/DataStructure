@@ -463,20 +463,14 @@ public class BinaryTree {
 		}
 	}
 
-	private class NumberWrapper {
-		int num = -1;
-	}
+	private int index = -1;
 
 	public Node deserialize(List<Integer> list) {
-		return deserialize(list, new NumberWrapper());
-	}
-
-	private Node deserialize(List<Integer> list, NumberWrapper index) {
-		index.num++;
-		if (list.get(index.num) != -1) {
-			Node node = new Node(list.get(index.num));
-			node.left = deserialize(list, index);
-			node.right = deserialize(list, index);
+		index++;
+		if (list.get(index) != -1) {
+			Node node = new Node(list.get(index));
+			node.left = deserialize(list);
+			node.right = deserialize(list);
 			return node;
 		}
 		return null;
