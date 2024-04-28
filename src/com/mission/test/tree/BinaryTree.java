@@ -266,7 +266,8 @@ public class BinaryTree {
 
 	/************Height********Width********Diameter********************/
 
-	// Height or max depth of the tree
+	/** Height or max depth of the tree **/
+
 	public int height(Node root) {
 		if (root == null)
 			return 0;
@@ -274,7 +275,8 @@ public class BinaryTree {
 		return Math.max(height(root.left), height(root.right)) + 1;
 	}
 
-	// width of the tree
+	/** width of the tree **/
+
 	public int width(Node root) {
 		if (root == null)
 			return 0;
@@ -339,6 +341,8 @@ public class BinaryTree {
 		}
 	}
 
+	/** Diameter of the tree **/
+
 	// Diameter is the distance between the two farthest nodes in the tree.
 	// These nodes may or may not go through the root.
 	// So, Diameter = Max (Diameter of left subtree, Diameter of right subtree,
@@ -385,7 +389,7 @@ public class BinaryTree {
 
 	/****************************************************************************/
 
-	/** BT to DLL */
+	/** BT to DLL **/
 	private Node previous = null;
 
 	public Node treeToDll(Node root) {
@@ -406,12 +410,7 @@ public class BinaryTree {
 		return head;
 	}
 
-	void printList(Node node) {
-		while (node != null) {
-			System.out.print(node.data + " ");
-			node = node.right;
-		}
-	}
+	/** Path finding **/
 
 	public void findPath(Node root, int sum) {
 		if (root != null) {
@@ -434,6 +433,7 @@ public class BinaryTree {
 				findPath(root.right, temp, list);
 		}
 
+		// backtrack
 		list.remove((Integer) root.data);
 	}
 
@@ -443,14 +443,7 @@ public class BinaryTree {
 		System.out.println();
 	}
 
-	public void serialize(Node root) {
-		List<Integer> list = new ArrayList<>();
-		serialize(root, list);
-		System.out.print("Serialized tree : ");
-		list.forEach(l -> System.out.print(l + " "));
-		Node root2 = deserialize(list);
-		System.out.println(this.equals(root, root2) ? "\nTree deserialized successfully" : "\nFailed to deserialize");
-	}
+	/** Tree serialize and deserialize **/
 
 	// process elements in preorder while treating null nodes as -1
 	private void serialize(Node root, List<Integer> list) {
@@ -520,6 +513,22 @@ public class BinaryTree {
 		System.out.println("Tree to DLL : ");
 		Node head = h.treeToDll(root);
 		h.printList(head);
+	}
+
+	public void serialize(Node root) {
+		List<Integer> list = new ArrayList<>();
+		serialize(root, list);
+		System.out.print("Serialized tree : ");
+		list.forEach(l -> System.out.print(l + " "));
+		Node root2 = deserialize(list);
+		System.out.println(this.equals(root, root2) ? "\nTree deserialized successfully" : "\nFailed to deserialize");
+	}
+
+	void printList(Node node) {
+		while (node != null) {
+			System.out.print(node.data + " ");
+			node = node.right;
+		}
 	}
 
 	class Node {
