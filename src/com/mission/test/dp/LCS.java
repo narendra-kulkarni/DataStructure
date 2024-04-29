@@ -16,6 +16,7 @@ public class LCS {
 			}
 		}
 
+		print(memo);
 		return memo[str1.length()][str2.length()];
 	}
 
@@ -25,5 +26,16 @@ public class LCS {
 		String str2 = "BE";
 		int max = l.lcs(str1, str2);
 		System.out.println("Longest common subsequence : " + max);
+	}
+
+	private void print(int[][] memo) {
+		if (memo != null && memo.length > 0) {
+			for (int i = 0; i < memo.length; i++) {
+				for (int j = 0; j < memo[i].length; j++) {
+					System.out.print(memo[i][j] + " ");
+				}
+				System.out.println();
+			}
+		}
 	}
 }
