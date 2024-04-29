@@ -4,25 +4,6 @@ import java.util.Stack;
 
 public class LinkedList {
 
-	public static void main(String[] args) {
-		LinkedList s = new LinkedList();
-		Node head = s.createLinkedList();
-		s.print(head);
-		System.out.println();
-		s.printReverse(head);
-		System.out.println();
-		s.printReverseIterative(head);
-		System.out.println();
-		head = s.reverse(head, null);
-		s.print(head);
-		head = s.reverseKNodes(head, 3);
-		System.out.println();
-		s.print(head);
-		Node temp = s.getNthFromLast(head, 7);
-		if (temp != null)
-			System.out.println("Nth node : " + temp.data);
-	}
-
 	public void print(Node head) {
 		Node temp = head;
 		while (temp != null) {
@@ -116,6 +97,27 @@ public class LinkedList {
 
 		// prev is now head of input list
 		return prev;
+	}
+
+	/***********************************************************/
+
+	public static void main(String[] args) {
+		LinkedList s = new LinkedList();
+		Node head = s.createLinkedList();
+		s.print(head);
+		System.out.println();
+		s.printReverse(head);
+		System.out.println();
+		s.printReverseIterative(head);
+		System.out.println();
+		head = s.reverse(head, null);
+		s.print(head);
+		head = s.reverseKNodes(head, 3);
+		System.out.println();
+		s.print(head);
+		Node temp = s.getNthFromLast(head, 7);
+		if (temp != null)
+			System.out.println("Nth node : " + temp.data);
 	}
 
 	private Node createLinkedList() {
