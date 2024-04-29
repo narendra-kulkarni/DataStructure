@@ -1,4 +1,4 @@
-package com.mission.test.slidingWindow;
+package com.mission.test.array.slidingWindow;
 
 // Type 2: Problems in which window size is not specified
 public class Variable {

@@ -1,6 +1,7 @@
-package com.mission.test.slidingWindow;
+package com.mission.test.array.slidingWindow;
 
-// Type 1: Problems where we are generally given a specific size of window ‘K’ in the question itself.
+// Type 1: Problems where we are generally given a specific size of
+// window ‘K’ in the question itself.
 public class Fixed {
 
     // 1. Compute the result for 1st window, i.e. include the
