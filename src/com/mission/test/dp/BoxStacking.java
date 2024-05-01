@@ -51,19 +51,19 @@ public class BoxStacking {
 			values[i] = finalBoxes[i].height;
 
 		// Modified LIS loops
+		int max = values[0];
 		for (int i = 1; i < finalBoxes.length; i++) {
 			for (int j = 0; j < i; j++) {
-				if (finalBoxes[i].width < finalBoxes[j].width && finalBoxes[i].depth < finalBoxes[j].depth
-						&& values[i] < values[j] + finalBoxes[i].height)
+				if (finalBoxes[i].width < finalBoxes[j].width
+						&& finalBoxes[i].depth < finalBoxes[j].depth
+						&& values[i] < values[j] + finalBoxes[i].height) {
 					values[i] = values[j] + finalBoxes[i].height;
+				}
 			}
-		}
 
-		// Get the maximum height
-		int max = values[0];
-		for (int i = 1; i < values.length; i++)
 			if (values[i] > max)
 				max = values[i];
+		}
 
 		return max;
 	}
