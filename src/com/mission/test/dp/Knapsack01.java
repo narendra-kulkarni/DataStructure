@@ -10,7 +10,8 @@ public class Knapsack01 {
 				if (i == 0 || j == 0)
 					memo[i][j] = 0;
 				else if (weights[i - 1] <= j)
-					memo[i][j] = Math.max(memo[i - 1][j - weights[i - 1]] + vals[i - 1], memo[i - 1][j]);
+					memo[i][j] = Math.max(memo[i - 1][j],
+							memo[i - 1][j - weights[i - 1]] + vals[i - 1]);
 				else
 					memo[i][j] = memo[i - 1][j];
 			}
