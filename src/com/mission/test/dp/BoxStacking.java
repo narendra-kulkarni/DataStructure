@@ -4,6 +4,26 @@ import java.util.Arrays;
 
 public class BoxStacking {
 
+	public static void main(String[] args) {
+
+		// You are given a set of n types of rectangular 3-D boxes, where
+		// the i^th box has height h(i), width w(i) and depth d(i) (all real numbers).
+		// You want to create a stack of boxes which is as tall as possible,
+		// but you can only stack a box on top of another box if the dimensions
+		// of the 2-D base of the lower box are each strictly larger than those of
+		// the 2-D base of the higher box. Of course, you can rotate a box so that any side
+		// functions as its base. It is also allowable to use multiple instances of the
+		// same type of box (aka multiple rotations of the same box can be considered)
+
+		BoxStacking b = new BoxStacking();
+		Box[] boxes = { b.new Box(4, 6, 7),
+				b.new Box(1, 2, 3),
+				b.new Box(4, 5, 6),
+				b.new Box(10, 12, 32) };
+		int res = b.getMaxHeight(boxes);
+		System.out.println("The maximum attainable height is : " + res);
+	}
+
 	public int getMaxHeight(Box[] boxes) {
 		// Store all three rotations of the box in the new array
 		Box[] finalBoxes = new Box[boxes.length * 3];
@@ -48,12 +68,7 @@ public class BoxStacking {
 		return max;
 	}
 
-	public static void main(String[] args) {
-		BoxStacking b = new BoxStacking();
-		Box[] boxes = { b.new Box(4, 6, 7), b.new Box(1, 2, 3), b.new Box(4, 5, 6), b.new Box(10, 12, 32) };
-		int res = b.getMaxHeight(boxes);
-		System.out.println("The maximum attainable height is : " + res);
-	}
+	/**********************************************/
 
 	private class Box implements Comparable<Box> {
 		int height;
