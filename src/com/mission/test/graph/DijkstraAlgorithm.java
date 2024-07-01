@@ -51,6 +51,8 @@ public class DijkstraAlgorithm {
 		return minIndex;
 	}
 
+	/******************************************************/
+
 	public static void main(String[] args) {
 		DijkstraAlgorithm d = new DijkstraAlgorithm();
 		d.createGraph();
