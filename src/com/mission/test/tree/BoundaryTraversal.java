@@ -45,6 +45,8 @@ public class BoundaryTraversal {
 		}
 	}
 
+	/*****************************************************/
+
 	public void boundaryTraversal() {
 		if (root != null) {
 			System.out.print("\nBoundary Traversal is : ");
@@ -89,6 +91,8 @@ public class BoundaryTraversal {
 			printLeaves(node.right);
 		}
 	}
+
+	/********************************************************/
 
 	public static void main(String[] args) {
 		BoundaryTraversal bt = new BoundaryTraversal();

@@ -17,26 +17,6 @@ import java.util.Stack;
  */
 public class TopologicalSort {
 
-	private int vertices;
-
-	private List<Integer>[] adj;
-
-	private int[] indegree;
-
-	@SuppressWarnings("unchecked")
-	private TopologicalSort(int num) {
-		vertices = num;
-		adj = new List[num];
-		indegree = new int[num];
-		for (int i = 0; i < num; i++)
-			adj[i] = new LinkedList<>();
-	}
-
-	private void addEdge(int src, int dest) {
-		adj[src].add(dest);
-		indegree[dest]++;
-	}
-
 	public void topologicalSort() {
 		Stack<Integer> stack = new Stack<>();
 		boolean[] visited = new boolean[vertices];
@@ -58,6 +38,8 @@ public class TopologicalSort {
 		// before visiting the neighbors).
 		stack.push(i);
 	}
+
+	/****************************************************/
 
 	// Backtracking solution
 	public void allTopologicalSort() {
@@ -91,6 +73,28 @@ public class TopologicalSort {
 			for (int temp : list)
 				System.out.print(temp + " ");
 		}
+	}
+
+	/**********************************************/
+
+	private int vertices;
+
+	private List<Integer>[] adj;
+
+	private int[] indegree;
+
+	@SuppressWarnings("unchecked")
+	private TopologicalSort(int num) {
+		vertices = num;
+		adj = new List[num];
+		indegree = new int[num];
+		for (int i = 0; i < num; i++)
+			adj[i] = new LinkedList<>();
+	}
+
+	private void addEdge(int src, int dest) {
+		adj[src].add(dest);
+		indegree[dest]++;
 	}
 
 	public static void main(String[] args) {
