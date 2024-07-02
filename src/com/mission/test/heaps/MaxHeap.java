@@ -9,8 +9,9 @@ public class MaxHeap {
 	private PriorityQueue<Integer> maxHeap;
 	//private PriorityQueue<Integer> minHeap;
 
-	// By default priority queue is min heap. To implement max heap we hap to provide new comparator
-	// New comparator can be from collections API or custom comparator.
+	// By default, the priority queue is a min heap.
+	// To implement a max heap, a new comparator needs to be provided.
+	// The new comparator can be from the collections API or a custom comparator.
 	public MaxHeap() {
 		//minHeap = new PriorityQueue<>();
 		maxHeap = new PriorityQueue<>(Collections.reverseOrder());

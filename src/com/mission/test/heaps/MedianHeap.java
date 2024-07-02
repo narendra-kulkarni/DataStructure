@@ -26,8 +26,8 @@ public class MedianHeap {
 		else
 			minHeap.offer(num);
 
-		// The max heap data should be smaller than min heap data. After addition of newer number if this
-		// property fails then readjust the roots of both the heaps.
+		// The max heap data should be smaller than the min heap data. If this property fails
+		// after adding a new number, then readjust the roots of both the heaps.
 		if (!minHeap.isEmpty() && maxHeap.peek() > minHeap.peek()) {
 			int temp = maxHeap.poll();
 			maxHeap.add(minHeap.poll());
