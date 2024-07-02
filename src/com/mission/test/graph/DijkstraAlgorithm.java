@@ -1,6 +1,6 @@
 package com.mission.test.graph;
 
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,37 +12,34 @@ public class DijkstraAlgorithm {
 	private Graph g;
 
 	public void dijkstra(int src) {
-		boolean[] spt = new boolean[g.vertices];
+		boolean[] visited = new boolean[g.vertices];
 		int[] dist = new int[g.vertices];
-		for (int i = 0; i < g.vertices; i++)
-			dist[i] = Integer.MAX_VALUE;
+		Arrays.fill(dist, Integer.MAX_VALUE);
 		dist[src] = 0;
 
 		for (int i = 0; i < g.vertices; i++) {
 			// Get the vertex which is still to be processed and 
-			// has current minimum distance
-			int u = minIndex(spt, dist);
-			spt[u] = true;
+			// has the current minimum distance
+			int u = minIndex(visited, dist);
+			visited[u] = true;
 
-			Iterator<Edge> itr = g.adjacencies[u].iterator();
-			while (itr.hasNext()) {
-				Edge v = itr.next();
-				if (!spt[v.dest] && dist[u] != Integer.MAX_VALUE
-						&& dist[v.dest] > dist[u] + v.weight)
-					dist[v.dest] = dist[u] + v.weight;
-			}
+            for (Edge v : g.adjacencies[u]) {
+                if (!visited[v.dest] && dist[u] != Integer.MAX_VALUE
+                        && dist[v.dest] > dist[u] + v.weight)
+                    dist[v.dest] = dist[u] + v.weight;
+            }
 		}
 
 		for (int i = 0; i < dist.length; i++)
 			System.out.println("Source : " + i + ", distance : " + dist[i]);
 	}
 
-	private int minIndex(boolean[] spt, int[] dist) {
+	private int minIndex(boolean[] visited, int[] dist) {
 		int minIndex = -1;
 		int min = Integer.MAX_VALUE;
 
 		for (int i = 0; i < g.vertices; i++) {
-			if (!spt[i] && dist[i] <= min) {
+			if (!visited[i] && dist[i] <= min) {
 				min = dist[i];
 				minIndex = i;
 			}
