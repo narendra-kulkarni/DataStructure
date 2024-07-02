@@ -7,9 +7,12 @@ import java.util.List;
 // Given a weighted graph and a source vertex in the graph,
 // find the shortest paths from the source to all the other vertices in the given graph.
 // Note: The given graph does not contain any negative edge.
-public class DijkstraAlgorithm {
 
-	private Graph g;
+// Dijkstra can also be considered as modification of the BFS algorithm as well where
+// instead of normal queue, a priority queue is used. Min index method in the following
+// code will not be needed, as the item to be processed will always be at the front of
+// the queue.
+public class DijkstraAlgorithm {
 
 	public void dijkstra(int src) {
 		boolean[] visited = new boolean[g.vertices];
@@ -49,6 +52,8 @@ public class DijkstraAlgorithm {
 	}
 
 	/******************************************************/
+
+	private Graph g;
 
 	public static void main(String[] args) {
 		DijkstraAlgorithm d = new DijkstraAlgorithm();
