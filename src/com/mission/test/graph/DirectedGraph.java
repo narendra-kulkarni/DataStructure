@@ -1,8 +1,9 @@
 package com.mission.test.graph;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 public class DirectedGraph {
@@ -55,6 +56,27 @@ public class DirectedGraph {
 				if (!visited[temp]) {
 					visited[temp] = true;
 					stack.push(temp);
+				}
+			}
+		}
+	}
+
+	public void bfs(int startNode) {
+		Queue<Integer> queue = new LinkedList<>();
+		boolean[] visited = new boolean[vertices];
+
+		// Mark the current node as visited and enqueue it
+		visited[startNode] = true;
+		queue.add(startNode);
+
+		while (!queue.isEmpty()) {
+			int currentNode = queue.poll();
+			System.out.print(currentNode + " ");
+
+			for (int neighbor : adj[currentNode]) {
+				if (!visited[neighbor]) {
+					visited[neighbor] = true;
+					queue.add(neighbor);
 				}
 			}
 		}
