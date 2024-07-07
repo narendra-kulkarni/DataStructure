@@ -20,19 +20,23 @@ public class TopologicalSort {
 	public void topologicalSort() {
 		Stack<Integer> stack = new Stack<>();
 		boolean[] visited = new boolean[vertices];
+
 		for (int i = 0; i < vertices; i++)
 			if (!visited[i])
 				topologicalSort(i, visited, stack);
+
 		while (!stack.isEmpty())
 			System.out.print(stack.pop() + " ");
 	}
 
 	private void topologicalSort(int i, boolean[] visited, Stack<Integer> stack) {
 		visited[i] = true;
+
 		for (int adjacent : adj[i]) {
 			if (!visited[adjacent])
 				topologicalSort(adjacent, visited, stack);
 		}
+
 		// In topological sort, element is added to the stack after visiting all
 		// the adjacent vertices (unlike DFS traversal where element is printed
 		// before visiting the neighbors).
