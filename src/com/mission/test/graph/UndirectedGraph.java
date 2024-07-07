@@ -35,7 +35,7 @@ public class UndirectedGraph {
 	}
 
 	// DFS tree provides path from starting vertex to the deepest in the branch
-	// If already visited vertex is encoutered which is not parent (note that, in
+	// If already visited vertex is encountered which is not parent (note that, in
 	// undirected graph u -> v also means v -> u) then there is cycle
 	private boolean isCyclic(int vertex, int parent, boolean[] visited) {
 		visited[vertex] = true;
