@@ -10,7 +10,7 @@ public class CountingSort {
 
 		// Count the occurrence of each number in the input array
 		// countArr = {1, 5, 3, 4}
-        for (int num : arr)
+		for (int num : arr)
 			countArr[num]++;
 
 		// Calculate cumulative counts : This is essentially 1 associative index array
@@ -21,7 +21,7 @@ public class CountingSort {
 		// Iterate on the input array.
 		// Get index for each element and place it in the sorted array.
 		// Reduce count for that element
-        for (int j : arr) {
+		for (int j : arr) {
             sortedArr[countArr[j] - 1] = j;
             countArr[j]--;
         }
