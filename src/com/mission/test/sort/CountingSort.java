@@ -22,9 +22,9 @@ public class CountingSort {
 		// Get index for each element and place it in the sorted array.
 		// Reduce count for that element
 		for (int j : arr) {
-            sortedArr[countArr[j] - 1] = j;
-            countArr[j]--;
-        }
+			sortedArr[countArr[j] - 1] = j;
+			countArr[j]--;
+		}
 
 		return sortedArr;
 	}
