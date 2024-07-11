@@ -38,7 +38,7 @@ public class MergeSort_List {
 
 	private Node getMid(Node head) {
 		Node slow = head, fast = head.next;
-		while (fast != null && fast.next != null) {
+		while (fast != null) {
 			fast = fast.next;
 			if (fast != null) {
 				fast = fast.next;
