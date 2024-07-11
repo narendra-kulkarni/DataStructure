@@ -3,6 +3,7 @@ package com.mission.test.graph;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 // Given a weighted graph and a source vertex in the graph,
 // find the shortest paths from the source to all the other vertices in the given graph.
@@ -14,64 +15,74 @@ import java.util.List;
 // the queue.
 public class DijkstraAlgorithm {
 
-	public void dijkstra(int src) {
-		boolean[] visited = new boolean[g.vertices];
+	// Time complexity: O((V+E)logV)
+	public void dijkstra(Graph g, int src) {
 		int[] dist = new int[g.vertices];
 		Arrays.fill(dist, Integer.MAX_VALUE);
 		dist[src] = 0;
 
-		for (int i = 0; i < g.vertices; i++) {
-			// Get the vertex which is still to be processed and 
-			// has the current minimum distance
-			int u = minIndex(visited, dist);
-			visited[u] = true;
+		// Use min heap which will provide minimum distance vertex in
+		// the following while loop. For the first iteration, min distance
+		// vertex is the source.
+		PriorityQueue<Pair> q = new PriorityQueue<>();
+		q.offer(new Pair(src, 0));
 
-            for (Edge v : g.adjacencies[u]) {
-                if (!visited[v.dest] && dist[u] != Integer.MAX_VALUE
-                        && dist[v.dest] > dist[u] + v.weight)
-                    dist[v.dest] = dist[u] + v.weight;
-            }
+		while (!q.isEmpty()) {
+			Pair current = q.poll();
+			int u = current.vertex;
+
+			// If shorter path is already available then skip following for loop
+			if (current.distance > dist[u])
+				continue;
+
+			for (Edge edge : g.adjacencies[u]) {
+				int newDist = dist[u] + edge.weight;
+				if (dist[edge.dest] > newDist) {
+					dist[edge.dest] = newDist;
+					q.offer(new Pair(edge.dest, newDist));
+				}
+			}
 		}
 
 		for (int i = 0; i < dist.length; i++)
 			System.out.println("Source : " + i + ", distance : " + dist[i]);
 	}
 
-	private int minIndex(boolean[] visited, int[] dist) {
-		int minIndex = -1;
-		int min = Integer.MAX_VALUE;
+	static class Pair implements Comparable<Pair> {
 
-		for (int i = 0; i < g.vertices; i++) {
-			if (!visited[i] && dist[i] <= min) {
-				min = dist[i];
-				minIndex = i;
-			}
+		int vertex;
+		int distance;
+
+		Pair(int vertex, int distance) {
+			this.vertex = vertex;
+			this.distance = distance;
 		}
 
-		return minIndex;
+		@Override
+		public int compareTo(Pair p) {
+			return Integer.compare(this.distance, p.distance);
+		}
 	}
 
 	/******************************************************/
 
-	private Graph g;
-
 	public static void main(String[] args) {
 		DijkstraAlgorithm d = new DijkstraAlgorithm();
-		d.createGraph();
-		d.dijkstra(0);
+		d.dijkstra(d.createGraph(), 0);
 	}
 
-	public void createGraph() {
-		g = new Graph(5);
+	public Graph createGraph() {
+		Graph g = new Graph(5);
 		g.addEdge(0, 1, 4);
 		g.addEdge(0, 2, 1);
 		g.addEdge(1, 4, 4);
 		g.addEdge(2, 1, 2);
 		g.addEdge(2, 3, 4);
 		g.addEdge(3, 4, 4);
+		return g;
 	}
 
-	private class Graph {
+	public class Graph {
 		int vertices;
 		List<Edge>[] adjacencies;
 
