@@ -15,7 +15,7 @@ public class MergeSort_Array {
 	// will be used for comparing the elements.
 	private void merge(int[] arr, int[] helper, int low, int mid, int high) {
 		// System.arraycopy(source, sourcePos, dest, destPost, length)
-        System.arraycopy(arr, low, helper, low, high + 1 - low);
+		System.arraycopy(arr, low, helper, low, high + 1 - low);
 
 		int i = low;
 		int j = mid + 1;
