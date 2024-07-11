@@ -10,9 +10,8 @@ import java.util.PriorityQueue;
 // Note: The given graph does not contain any negative edge.
 
 // Dijkstra can also be considered as modification of the BFS algorithm as well where
-// instead of normal queue, a priority queue is used. Min index method in the following
-// code will not be needed, as the item to be processed will always be at the front of
-// the queue.
+// instead of normal queue, a priority queue is used. With the use of priority queue
+// the item to be processed next will always be at the front of the queue.
 public class DijkstraAlgorithm {
 
 	// Time complexity: O((V+E)logV)
