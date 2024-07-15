@@ -361,6 +361,7 @@ public class BinaryTree {
 		if (root == null)
 			return new DiameterHeight(0, 0);
 
+		// Post order processing
 		DiameterHeight left = diameterHelper(root.left);
 		DiameterHeight right = diameterHelper(root.right);
 
