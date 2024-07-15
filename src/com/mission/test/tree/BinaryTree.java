@@ -147,12 +147,13 @@ public class BinaryTree {
 		if (root1 == null && root2 == null)
 			return true;
 
-		else if ((root1 == null && root2 != null) || (root1 != null && root2 == null))
+		else if (root1 == null || root2 == null)
 			return false;
 
 		else {
-			return (root1.data == root2.data && isSymmetric(root1.left, root2.right)
-					&& isSymmetric(root1.right, root2.left));
+			return root1.data == root2.data
+					&& isSymmetric(root1.left, root2.right)
+					&& isSymmetric(root1.right, root2.left);
 		}
 	}
 
@@ -160,11 +161,13 @@ public class BinaryTree {
 		if (root1 == null && root2 == null)
 			return true;
 
-		else if ((root1 == null && root2 != null) || (root1 != null && root2 == null))
+		else if (root1 == null || root2 == null)
 			return false;
 
 		else {
-			return (root1.data == root2.data && equals(root1.left, root2.left) && equals(root1.right, root2.right));
+			return root1.data == root2.data
+					&& equals(root1.left, root2.left)
+					&& equals(root1.right, root2.right);
 		}
 	}
 
@@ -191,8 +194,9 @@ public class BinaryTree {
 		if (root == null)
 			return true;
 
-		return ((root.data > min && root.data <= max) && isBST(root.left, min, root.data)
-				&& isBST(root.right, root.data, max));
+		return (root.data > min && root.data <= max)
+				&& isBST(root.left, min, root.data)
+				&& isBST(root.right, root.data, max);
 	}
 
 	// Returns the closest element to the given value
@@ -350,37 +354,30 @@ public class BinaryTree {
 	// This can be calculated in n square time. If height and diameter is
 	// calculated in the same iteration then complexity can be reduced to O(n).
 	public int diameter(Node root) {
-		HeightWrapper h = new HeightWrapper();
-		return diameter(root, h);
+		return diameterHelper(root).diameter;
 	}
 
-	private int diameter(Node root, HeightWrapper h) {
-		if (root == null) {
-			h.height = 0;
-			return 0;
-		}
+	private DiameterHeight diameterHelper(Node root) {
+		if (root == null)
+			return new DiameterHeight(0, 0);
 
-		// The lh and rh are not returned back. They are used to calculate root
-		// diameter and height of the current node.
-		HeightWrapper lh = new HeightWrapper();
-		HeightWrapper rh = new HeightWrapper();
+		DiameterHeight left = diameterHelper(root.left);
+		DiameterHeight right = diameterHelper(root.right);
 
-		int ld = diameter(root.left, lh);
-		int rd = diameter(root.right, rh);
-		int rootD = lh.height + rh.height + 1;
-		h.height = Math.max(lh.height, rh.height) + 1;
+		int height = Math.max(left.height, right.height) + 1;
+		int rootDiameter = left.height + right.height + 1;
+		int maxDiameter = Math.max(rootDiameter, Math.max(left.diameter, right.diameter));
 
-		return Math.max(rootD, Math.max(ld, rd));
+		return new DiameterHeight(maxDiameter, height);
 	}
 
-	// This wrapper is required since in java two values can not be returned
-	// back and also it does not have
-	// pass by reference.
-	private class HeightWrapper {
+	private static class DiameterHeight {
+		int diameter;
 		int height;
 
-		public HeightWrapper() {
-			height = 0;
+		DiameterHeight(int diameter, int height) {
+			this.diameter = diameter;
+			this.height = height;
 		}
 	}
 
@@ -394,7 +391,7 @@ public class BinaryTree {
 
 	public Node treeToDll(Node root) {
 		if (root == null)
-			return root;
+			return null;
 
 		Node head = treeToDll(root.left);
 
@@ -414,27 +411,27 @@ public class BinaryTree {
 
 	public void findPath(Node root, int sum) {
 		if (root != null) {
-			List<Integer> list = new ArrayList<>();
-			findPath(root, sum, list);
+			findPath(root, sum, new ArrayList<>());
 		}
 	}
 
-	private void findPath(Node root, int sum, List<Integer> list) {
-		list.add(root.data);
-		int temp = sum - root.data;
+	private void findPath(Node root, int remainingSum, List<Integer> path) {
+		if (root == null)
+			return;
+
+		path.add(root.data);
+		remainingSum -= root.data;
 
 		if (root.left == null && root.right == null) {
-			if (temp == 0)
-				printPath(list);
+			if (remainingSum == 0)
+				printPath(path);
 		} else {
-			if (root.left != null)
-				findPath(root.left, temp, list);
-			if (root.right != null)
-				findPath(root.right, temp, list);
+			findPath(root.left, remainingSum, path);
+			findPath(root.right, remainingSum, path);
 		}
 
-		// backtrack
-		list.remove((Integer) root.data);
+		// backtrack by removing the last element
+		path.remove(path.size() - 1);
 	}
 
 	private void printPath(List<Integer> list) {
@@ -456,17 +453,30 @@ public class BinaryTree {
 		}
 	}
 
-	private int index = -1;
-
 	public Node deserialize(List<Integer> list) {
-		index++;
-		if (list.get(index) != -1) {
-			Node node = new Node(list.get(index));
-			node.left = deserialize(list);
-			node.right = deserialize(list);
-			return node;
+		return deserializeHelper(list, new IndexWrapper());
+	}
+
+	private Node deserializeHelper(List<Integer> list, IndexWrapper index) {
+		if (index.value >= list.size()) {
+			return null;
 		}
-		return null;
+
+		Integer value = list.get(index.value);
+		index.value++;
+
+		if (value == -1) {
+			return null;
+		}
+
+		Node node = new Node(value);
+		node.left = deserializeHelper(list, index);
+		node.right = deserializeHelper(list, index);
+		return node;
+	}
+
+	private static class IndexWrapper {
+		int value = 0;
 	}
 
 	/**********************************************************************/
