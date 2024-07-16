@@ -109,6 +109,37 @@ public class BinaryTree {
 		}
 	}
 
+	public void zigzagTraversal(Node root) {
+		if (root == null)
+			return;
+
+		Stack<Node> currentLevel = new Stack<>();
+		Stack<Node> nextLevel = new Stack<>();
+		boolean leftToRight = true;
+
+		currentLevel.push(root);
+
+		while (!currentLevel.isEmpty()) {
+			Node node = currentLevel.pop();
+			System.out.print(node.data + " ");
+
+			if (leftToRight) {
+				if (node.left != null) nextLevel.push(node.left);
+				if (node.right != null) nextLevel.push(node.right);
+			} else {
+				if (node.right != null) nextLevel.push(node.right);
+				if (node.left != null) nextLevel.push(node.left);
+			}
+
+			if (currentLevel.isEmpty()) {
+				leftToRight = !leftToRight;
+				Stack<Node> temp = currentLevel;
+				currentLevel = nextLevel;
+				nextLevel = temp;
+			}
+		}
+	}
+
 	public int getLevel(Node root, int key, int level) {
 		if (root == null)
 			return -1;
@@ -552,6 +583,8 @@ public class BinaryTree {
 		h.inorder(root);
 		System.out.println();
 		h.level(root);
+		System.out.println();
+		h.zigzagTraversal(root);
 		System.out.println();
 		System.out.println("Level of 1 is : " + h.getLevel(root, 1, 0));
 		System.out.println(h.isSymmetric(root, root));
