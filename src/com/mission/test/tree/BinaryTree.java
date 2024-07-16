@@ -268,6 +268,48 @@ public class BinaryTree {
 		}
 	}
 
+	// Node deletion in BST
+	public Node deleteNode(Node root, int key) {
+		if (root == null) {
+			return null;
+		}
+
+		if (key < root.data) {
+			root.left = deleteNode(root.left, key);
+		} else if (key > root.data) {
+			root.right = deleteNode(root.right, key);
+		} else {
+			// Node to delete found
+
+			// Case 1: Leaf node
+			if (root.left == null && root.right == null) {
+				return null;
+			}
+
+			// Case 2: Node with only one child
+			if (root.left == null) {
+				return root.right;
+			}
+			if (root.right == null) {
+				return root.left;
+			}
+
+			// Case 3: Node with two children
+			Node minNode = findMin(root.right);
+			root.data = minNode.data;
+			root.right = deleteNode(root.right, minNode.data);
+		}
+
+		return root;
+	}
+
+	private Node findMin(Node node) {
+		while (node.left != null) {
+			node = node.left;
+		}
+		return node;
+	}
+
 	/************Height********Width********Diameter********************/
 
 	/** Height or max depth of the tree **/
