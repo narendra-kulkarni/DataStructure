@@ -113,6 +113,8 @@ public class BinaryTree {
 		if (root == null)
 			return;
 
+		// This can also be achieved using deque.
+		// Add front of the queue once, and end of the queue next. Iterate
 		Stack<Node> currentLevel = new Stack<>();
 		Stack<Node> nextLevel = new Stack<>();
 		boolean leftToRight = true;
