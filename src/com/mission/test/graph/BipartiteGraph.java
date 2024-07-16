@@ -74,7 +74,6 @@ public class BipartiteGraph {
         return true;
     }
 
-
     /******************************************/
 
     static class Graph {
