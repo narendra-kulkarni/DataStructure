@@ -113,8 +113,6 @@ public class BinaryTree {
 		if (root == null)
 			return;
 
-		// This can also be achieved using deque.
-		// Add front of the queue once, and end of the queue next. Iterate
 		Stack<Node> currentLevel = new Stack<>();
 		Stack<Node> nextLevel = new Stack<>();
 		boolean leftToRight = true;
@@ -139,6 +137,40 @@ public class BinaryTree {
 				currentLevel = nextLevel;
 				nextLevel = temp;
 			}
+		}
+	}
+
+	public void zigzagLevelOrder(Node root) {
+		if (root == null) return;
+
+		Queue<Node> queue = new LinkedList<>();
+		queue.offer(root);
+		boolean isLeftToRight = true;
+
+		while (!queue.isEmpty()) {
+			int levelSize = queue.size();
+			LinkedList<Integer> currentLevel = new LinkedList<>();
+
+			for (int i = 0; i < levelSize; i++) {
+				Node node = queue.poll();
+
+				if (isLeftToRight) {
+					currentLevel.addLast(node.data);
+				} else {
+					currentLevel.addFirst(node.data);
+				}
+
+				if (node.left != null) queue.offer(node.left);
+				if (node.right != null) queue.offer(node.right);
+			}
+
+			// Print the current level
+			for (int val : currentLevel) {
+				System.out.print(val + " ");
+			}
+			System.out.println(); // Move to the next line for the next level
+
+			isLeftToRight = !isLeftToRight;
 		}
 	}
 
