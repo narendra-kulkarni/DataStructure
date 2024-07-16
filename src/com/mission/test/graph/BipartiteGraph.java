@@ -41,6 +41,40 @@ public class BipartiteGraph {
         return true;
     }
 
+    // Adjacency matrix variation
+    public static boolean isBipartite(int[][] graph, int src) {
+        int vertices = graph.length;
+        int[] color = new int[vertices];
+        Arrays.fill(color, -1);
+        color[src] = 0;
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(src);
+
+        while (!queue.isEmpty()) {
+            int temp = queue.poll();
+
+            for (int adj = 0; adj < vertices; adj++) {
+                // IMP: If there is an edge between temp and adj
+                if (graph[temp][adj] == 1) {
+                    // If there is a self loop, then graph can not be bipartite
+                    if (adj == temp)
+                        return false;
+
+                    if (color[adj] == -1) {
+                        queue.add(adj);
+                        color[adj] = 1 - color[temp];
+                    }
+                    else if (color[adj] == color[temp])
+                        return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+
     /******************************************/
 
     static class Graph {
@@ -64,12 +98,21 @@ public class BipartiteGraph {
     }
 
     public static void main(String[] args) {
+        // Adjacency List variation
         Graph g = new Graph(4);
         g.addEdge(0, 1);
         g.addEdge(0, 3);
         g.addEdge(1, 2);
         g.addEdge(2, 3);
-
         System.out.println("Graph is bipartite : " + BipartiteGraph.isBipartite(g, 0));
+
+        // Adjacency matrix variation
+        int[][] graph = {
+            {0, 1, 0, 1},
+            {1, 0, 1, 0},
+            {0, 1, 0, 1},
+            {1, 0, 1, 0}
+        };
+        System.out.println("Graph is bipartite : " + BipartiteGraph.isBipartite(graph, 0));
     }
 }
