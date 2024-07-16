@@ -265,8 +265,8 @@ public class BinaryTree {
 			return false;
 		}
 
-		return isValidBSTHelper(node.left, lower, node.val)
-				&& isValidBSTHelper(node.right, node.val, upper);
+		return isValidBSTHelper(node.left, lower, node.data)
+				&& isValidBSTHelper(node.right, node.data, upper);
 	}
 
 	// Returns the closest element to the given value
