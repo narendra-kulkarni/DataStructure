@@ -251,6 +251,24 @@ public class BinaryTree {
 		}
 	}
 
+	public boolean isValidBST(Node root) {
+		return isValidBSTHelper(root, null, null);
+	}
+
+	private boolean isValidBSTHelper(Node node, Integer lower, Integer upper) {
+		if (node == null) {
+			return true;
+		}
+
+		if ((lower != null && node.data <= lower)
+				|| (upper != null && node.data >= upper)) {
+			return false;
+		}
+
+		return isValidBSTHelper(node.left, lower, node.val)
+				&& isValidBSTHelper(node.right, node.val, upper);
+	}
+
 	// Returns the closest element to the given value
 	public Node closestBST(Node root, int val) {
 		if (root.data == val)
