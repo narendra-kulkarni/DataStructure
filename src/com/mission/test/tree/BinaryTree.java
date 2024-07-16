@@ -251,19 +251,6 @@ public class BinaryTree {
 		}
 	}
 
-	public boolean isBST2(Node root) {
-		return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-	}
-
-	private boolean isBST(Node root, int min, int max) {
-		if (root == null)
-			return true;
-
-		return (root.data > min && root.data <= max)
-				&& isBST(root.left, min, root.data)
-				&& isBST(root.right, root.data, max);
-	}
-
 	// Returns the closest element to the given value
 	public Node closestBST(Node root, int val) {
 		if (root.data == val)
