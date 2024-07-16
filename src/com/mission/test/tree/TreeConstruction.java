@@ -28,10 +28,8 @@ public class TreeConstruction {
         }
 
         int inIndex = inorderMap.get(root.val);
-
         root.left = buildTreeHelper(preorder, inStart, inIndex - 1);
         root.right = buildTreeHelper(preorder, inIndex + 1, inEnd);
-
         return root;
     }
 
