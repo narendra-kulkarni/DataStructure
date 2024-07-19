@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -41,6 +42,52 @@ public class TopologicalSort {
 		// the adjacent vertices (unlike DFS traversal where element is printed
 		// before visiting the neighbors).
 		stack.push(i);
+	}
+
+	/**************************************************/
+
+	// BFS solution
+	public List<Integer> topologicalSortBFS() {
+		int[] inDegree = new int[vertices];
+
+		// Calculate in-degree for each vertex
+		for (int i = 0; i < vertices; i++) {
+			for (int neighbor : adj[i]) {
+				inDegree[neighbor]++;
+			}
+		}
+
+		// Create a queue and enqueue all vertices with in-degree 0
+		Queue<Integer> queue = new LinkedList<>();
+		for (int i = 0; i < vertices; i++) {
+			if (inDegree[i] == 0) {
+				queue.offer(i);
+			}
+		}
+
+		List<Integer> topOrder = new ArrayList<>();
+		int visited = 0;
+
+		while (!queue.isEmpty()) {
+			int v = queue.poll();
+			topOrder.add(v);
+			visited++;
+
+			// Reduce in-degree of adjacent vertices
+			for (int neighbor : adj[v]) {
+				if (--inDegree[neighbor] == 0) {
+					queue.offer(neighbor);
+				}
+			}
+		}
+
+		// Check if there was a cycle
+		if (visited != vertices) {
+			System.out.println("There exists a cycle in the graph");
+			return null;
+		}
+
+		return topOrder;
 	}
 
 	/****************************************************/
