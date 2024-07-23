@@ -44,11 +44,10 @@ public class Variable {
         if (s == null || s.isEmpty())
             return 0;
 
-        int n = s.length();
         int maxLength = 0;
         Map<Character, Integer> charMap = new HashMap<>();
 
-        for (int right = 0, left = 0; right < n; right++) {
+        for (int right = 0, left = 0; right < s.length(); right++) {
             char currentChar = s.charAt(right);
             if (charMap.containsKey(currentChar)) {
                 left = Math.max(charMap.get(currentChar) + 1, left);
