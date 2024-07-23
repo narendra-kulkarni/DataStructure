@@ -1,5 +1,8 @@
 package com.mission.test.array.slidingWindow;
 
+import java.util.HashMap;
+import java.util.Map;
+
 // Type 2: Problems in which window size is not specified
 public class Variable {
 
@@ -34,6 +37,27 @@ public class Variable {
         }
 
         return res;
+    }
+
+    // This is the optimized version O(N)
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.isEmpty())
+            return 0;
+
+        int n = s.length();
+        int maxLength = 0;
+        Map<Character, Integer> charMap = new HashMap<>();
+
+        for (int right = 0, left = 0; right < n; right++) {
+            char currentChar = s.charAt(right);
+            if (charMap.containsKey(currentChar)) {
+                left = Math.max(charMap.get(currentChar) + 1, left);
+            }
+            charMap.put(currentChar, right);
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
     }
 
     public static void main(String[] args) {
