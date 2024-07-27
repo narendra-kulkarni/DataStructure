@@ -3,7 +3,9 @@ package com.mission.test.array.slidingWindow;
 import java.util.HashMap;
 import java.util.Map;
 
-// Type 2: Problems in which window size is not specified
+// Type 2: Problems in which window size is not specified.
+// Two pointers (left, right) -> Window expansion (right++) -> Window Contraction (left++)
+//    -> Window state (map or array) -> Valid window & optimization condition (imp part of the problem)
 //
 // Key Points for Optimization:
 // 1. Efficient State Updates: Use data structures that allow O(1) updates to the window state.
