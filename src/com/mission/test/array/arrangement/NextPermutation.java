@@ -44,7 +44,7 @@ public class NextPermutation {
         // greater permutation of its integer.
         // For example, the next permutation of arr = [1,2,3] is [1,3,2]
         NextPermutation n = new NextPermutation();
-        int[] nums = {1, 2, 4, 3};
+        int[] nums = {1, 4, 3, 2};
         n.nextPermutation(nums);
         System.out.println(Arrays.toString(nums));
     }
