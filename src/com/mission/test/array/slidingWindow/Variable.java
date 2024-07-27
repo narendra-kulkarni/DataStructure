@@ -6,41 +6,38 @@ import java.util.Map;
 // Type 2: Problems in which window size is not specified
 public class Variable {
 
-    // Window = left ---- right
-    // 1. In this type of sliding window problem, we increase
-    //    our right pointer one by one till our condition is true.
-    // 2. At any step if our condition does not match, we shrink
-    //    the size of the window by increasing left pointer
-    // 3. Again when our condition satisfies, we start increasing
-    //    the right pointer and follow step 1
-    // 4. Follow the steps until end of the array is reached.
+    // Variable Window Pattern
+    /*
+    public Result slidingWindowTemplate(String/Array input) {
+        // Initialize window pointers and other necessary variables
+        int left = 0, right = 0;
+        Result result = ...; // Initialize result structure
 
-    public int longestUniqueSubstring(String str) {
-        int res = 0;
+        // Initialize window state (e.g., HashMap or array)
+        WindowState state = ...;
 
-        for (int left = 0; left < str.length(); left++) {
-            boolean[] visited = new boolean[256];
+        while (right < input.length()) {
+            // Expand the window
+            addElement(state, input[right]);
 
-            // Here window size = 1 needs to be considered.
-            // Therefore, left = right
-            for (int right = left; right < str.length(); right++) {
-                if (visited[str.charAt(right)]) {
-                    break;
-                } else {
-                    // window size = right - left + 1
-                    res = Math.max(res, right - left + 1);
-                    visited[str.charAt(right)] = true;
-                }
+            // Check if window is valid
+            while (windowIsValid(state)) {
+                // Update result if necessary
+                result = updateResult(result, left, right);
+
+                // Contract the window
+                removeElement(state, input[left]);
+                left++;
             }
 
-            visited[str.charAt(left)] = false;
+            right++;
         }
 
-        return res;
+        return result;
     }
+    */
 
-    // This is the optimized version O(N)
-    public int lengthOfLongestSubstring(String s) {
+    public int longestUniqueSubstring(String s) {
         if (s == null || s.isEmpty())
             return 0;
 
