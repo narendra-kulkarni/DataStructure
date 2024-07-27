@@ -4,6 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 // Type 2: Problems in which window size is not specified
+//
+// Key Points for Optimization:
+// 1. Efficient State Updates: Use data structures that allow O(1) updates to the window state.
+// 2. Minimize Re-computation: Avoid recalculating the entire window state.
+//                             Instead, update it incrementally as you add or remove elements.
+// 3. Early Termination: If possible, add conditions to break the loop early when a solution
+//                             is found or further processing is unnecessary.
+// 4. Space Efficiency: For problems involving a fixed character set (like ASCII),
+//                             use an array instead of a HashMap for better performance.
+// 5. Avoid Substring Creation: In string problems, avoid creating substrings in each iteration.
+//                             Instead, keep track of indices and create the final substring only once.
 public class Variable {
 
     // Variable Window Pattern
