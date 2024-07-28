@@ -33,7 +33,7 @@ public class Variable {
             // Expand the window
             addElement(state, input[right]);
 
-            // Check if window is valid
+            // While the window is valid
             while (windowIsValid(state)) {
                 // Update result if necessary
                 result = updateResult(result, left, right);
@@ -90,7 +90,7 @@ public class Variable {
             if (target[current] > 0 && window[current] <= target[current])
                 total--;
 
-            // Check if window is valid, i.e., meets the target state
+            // While the window is valid, i.e., meets the target state
             while (total == 0) {
                 // Update result if necessary
                 if (result.isEmpty() || right - left + 1 < result.length()) {
