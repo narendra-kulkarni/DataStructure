@@ -69,12 +69,59 @@ public class Variable {
         return maxLength;
     }
 
+    public String minWindow(String s, String t) {
+        if (s.length() < t.length())
+            return "";
+
+        // Note that this is int array
+        int[] target = new int[128];
+        for (char ch : t.toCharArray())
+            target[ch]++;
+
+        String result = "";
+        int total = t.length();
+        int[] window = new int[128];
+
+        for (int left = 0, right = 0; right < s.length(); right++) {
+            // Expand the window & calculate current state
+            char current = s.charAt(right);
+            window[current]++;
+
+            if (target[current] > 0 && window[current] <= target[current])
+                total--;
+
+            // Check if window is valid, i.e., meets the target state
+            while (total == 0) {
+                // Update result if necessary
+                if (result.isEmpty() || right - left + 1 < result.length()) {
+                    result = s.substring(left, right + 1);
+                }
+
+                // Contract the window
+                char leftChar = s.charAt(left);
+                window[leftChar]--;
+                if (target[leftChar] > 0 && window[leftChar] < target[leftChar])
+                    total++;
+
+                left++;
+            }
+        }
+
+        return result;
+    }
+
     public static void main(String[] args) {
-        // Given a string str, find the length of the longest substring
+        // Problem 1: Given a string str, find the length of the longest substring
         // without repeating characters.
         Variable v = new Variable();
         String str = "geeksforgeeks";
         int len = v.longestUniqueSubstring(str);
         System.out.println("The length : " + len);
+
+        // Problem 2: Given two strings s and t of lengths m and n respectively, return
+        // the minimum window substring of s such that every character in t
+        // (including duplicates) is included in the window
+        String s = "ADOBECODEBANC", t = "ABC";
+        System.out.println("Minimum Window Substring : " + v.minWindow(s, t));
     }
 }
