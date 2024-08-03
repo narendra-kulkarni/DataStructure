@@ -1,0 +1,10 @@
+Imagine Input n = 100,000
+
+O(logN) will perform ~16 operations
+O(N) will perform 100 k operations
+O(NlogN) will perform 1600 k operations
+O(N*N) will perform 100 B operations
+
+Exponential complexity O(2^N)
+2^100k is a 1 followed by approximately 30,100 zeros. For context, this number
+is vastly larger than the number of atoms in the observable universe.
