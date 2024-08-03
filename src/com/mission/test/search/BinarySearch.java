@@ -63,7 +63,7 @@ public class BinarySearch {
 			if (arr[mid] == key)
 				return mid;
 			// left half is sorted
-			else if (arr[low] < arr[mid]) {
+			else if (arr[low] <= arr[mid]) {
 				// If key is in the range of left sorted half
 				if (key >= arr[low] && key < arr[mid])
 					high = mid - 1;
