@@ -55,6 +55,7 @@ public class Loop {
     public static void main(String[] args) {
         Loop l = new Loop();
         Node head = createLoopedList();
+        System.out.println("4 5 6 -> 7 8 9 10 (loop to 7)");
         System.out.println("Length of loop : " + l.findLoopLength(head));
     }
 
