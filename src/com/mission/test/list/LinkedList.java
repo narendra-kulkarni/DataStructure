@@ -40,7 +40,7 @@ public class LinkedList {
 		Node slow = head;
 		Node fast = head;
 
-		while (fast != null && fast.next != null) {
+		while (fast.next != null && fast.next.next != null) {
 			slow = slow.next;
 			fast = fast.next.next;
 		}
@@ -119,6 +119,8 @@ public class LinkedList {
 		Node head = s.createLinkedList();
 		s.print(head);
 		System.out.println();
+		System.out.print("Mid of the list : " + s.findMiddle(head).data);
+		System.out.println();
 		s.printReverse(head);
 		System.out.println();
 		s.printReverseIterative(head);
@@ -128,9 +130,10 @@ public class LinkedList {
 		head = s.reverseKNodes(head, 3);
 		System.out.println();
 		s.print(head);
-		Node temp = s.getNthFromLast(head, 7);
+		System.out.println();
+		Node temp = s.getNthFromLast(head, 4);
 		if (temp != null)
-			System.out.println("Nth node : " + temp.data);
+			System.out.println("Nth (4th) node from the end : " + temp.data);
 	}
 
 	private Node createLinkedList() {
