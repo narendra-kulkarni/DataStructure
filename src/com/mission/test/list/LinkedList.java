@@ -70,7 +70,7 @@ public class LinkedList {
 			return null;
 	}
 
-	public Node reverseList(Node head) {
+	public Node reverse(Node head) {
 		Node prev = null;
 		Node curr = head;
 		Node next = null;
@@ -123,7 +123,7 @@ public class LinkedList {
 		System.out.println();
 		s.printReverseIterative(head);
 		System.out.println();
-		head = s.reverse(head, null);
+		head = s.reverse(head);
 		s.print(head);
 		head = s.reverseKNodes(head, 3);
 		System.out.println();
