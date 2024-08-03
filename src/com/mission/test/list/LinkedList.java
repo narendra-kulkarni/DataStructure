@@ -36,6 +36,18 @@ public class LinkedList {
 		}
 	}
 
+	public Node findMiddle(Node head) {
+		Node slow = head;
+		Node fast = head;
+
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+
+		return slow;
+	}
+
 	public Node getNthFromLast(Node head, int n) {
 		Node nth = head;
 		Node temp = head;
@@ -58,18 +70,19 @@ public class LinkedList {
 			return null;
 	}
 
-	public Node reverse(Node head, Node prev) {
-		if (head == null)
-			return null;
+	public Node reverseList(Node head) {
+		Node prev = null;
+		Node curr = head;
+		Node next = null;
 
-		if (head.next == null) {
-			head.next = prev;
-			return head;
+		while (curr != null) {
+			next = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = next;
 		}
 
-		Node temp = reverse(head.next, head);
-		head.next = prev;
-		return temp;
+		return prev;
 	}
 
 	public Node reverseKNodes(Node head, int k) {
