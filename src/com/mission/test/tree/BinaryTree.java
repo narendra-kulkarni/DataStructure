@@ -476,12 +476,10 @@ public class BinaryTree {
 		// Post order processing
 		DiameterHeight left = diameterHelper(root.left);
 		DiameterHeight right = diameterHelper(root.right);
-
-		int height = Math.max(left.height, right.height) + 1;
-		// Check if diameter is calculated using nodes or edges
 		int rootDiameter = left.height + right.height + 1;
 		int maxDiameter = Math.max(rootDiameter, Math.max(left.diameter, right.diameter));
 
+		int height = Math.max(left.height, right.height) + 1;
 		return new DiameterHeight(maxDiameter, height);
 	}
 
