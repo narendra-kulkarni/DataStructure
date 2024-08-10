@@ -46,6 +46,50 @@ public class TopologicalSort {
 
 	/**************************************************/
 
+	// IMP: Topological sort with loop detection
+
+	public boolean topologicalSortWithCycleDetection() {
+		Stack<Integer> stack = new Stack<>();
+		int[] visited = new int[vertices];
+
+		for (int i = 0; i < vertices; i++) {
+			if (visited[i] == 0) {
+				if (!topologicalSort(i, visited, stack)) {
+					// cycle detected
+					return false;
+				}
+			}
+		}
+
+		while (!stack.isEmpty()) {
+			System.out.print(stack.pop() + " ");
+		}
+		return true;
+	}
+
+	private boolean topologicalSort(int i, int[] visited, Stack<Integer> stack) {
+		visited[i] = 1; //currently visiting
+
+		for (int adjacent : adj[i]) {
+			if (visited[adjacent] == 1) {
+				// If an adjacent vertex is in the visiting state, cycle is detected
+				return false;
+			} else if (visited[adjacent] == 0) {
+				// If an adjacent vertex has not been visited, recurse on it
+				if (!topologicalSort(adjacent, visited, stack)) {
+					return false;
+				}
+			}
+		}
+
+		// Mark the current node as visited and push to stack
+		visited[i] = 2;
+		stack.push(i);
+		return true;
+	}
+
+	/***************************************************/
+
 	// BFS solution
 	public List<Integer> topologicalSortBFS() {
 		int[] inDegree = new int[vertices];
