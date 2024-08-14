@@ -1,4 +1,4 @@
-Generally DP problems try to evaluate local minima or maxima for the problem.
+Generally DP problems try to evaluate local minima or maxima for the problem. In some cases, count is computed.
 e.g. longest common subsequence, minimum number of coins for change, maximum value for knapsack
 
 DP problems have following properties
