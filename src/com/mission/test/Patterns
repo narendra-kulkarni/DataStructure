@@ -1,0 +1,32 @@
+Arrays & String
+---------------
+1. Prefix Sum
+2. Two Pointers
+3. Sliding Window
+
+Linked List
+-----------
+4. Slow Fast Pointers
+5. In place Linked List Reversal
+
+Stack & Queue
+--------------
+6. Monotonic Stack (Next greater/smaller element)
+
+Searching, Sorting & Selection
+---------------------------
+7. Modified Binary Search
+8. Intervals
+9. Top k (heap/Quick Select
+
+Trees & Graphs
+-------------
+10. Tree Traversal
+11. DFS
+12. BFS
+13. Matrix Traversal
+
+Recursion
+-----------
+14. Backtracking
+15. Dynamic Programming
