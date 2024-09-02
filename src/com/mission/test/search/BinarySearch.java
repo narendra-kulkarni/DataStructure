@@ -38,7 +38,7 @@ public class BinarySearch {
 		return -1;
 	}
 
-	// Finding no. of rotations is similar to the finding index of the minimum element in the array
+	// Finding no. of rotations is similar to finding the index of the minimum element in the array
 	public int findNumberOfRotations(int[] arr) {
 		int low = 0;
 		int high = arr.length - 1;
