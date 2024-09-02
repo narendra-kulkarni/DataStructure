@@ -13,12 +13,12 @@ public class BinarySearch {
 		System.out.println("Index of the search key is : " + s.binarySearch(array, 8));
 	}
 
-	// In binary search stop condition is low > high. The loop needs to run till low is smaller than or equal to
-	// the high value. Mid is calculated as (low + (high - low) / 2) to avoid integer overflow. The "low + high"
-	// in (low + high) / 2, can overflow if low and high are large numbers.
+	// In binary search stop condition is low > high. The loop needs to run till low is smaller than
+	// or equal to the high value. Mid is calculated as (low + (high - low) / 2) to avoid integer overflow.
+	// The "low + high" in (low + high) / 2, can overflow if low and high are large numbers.
 
-	// Every turn we pick half of the entire list for searching, to achieve O(log N) results. In rotated array check
-	// which side is fully sorted and take the decision based on that.
+	// Every turn we pick half of the entire list for searching, to achieve O(log N) results. In rotated
+	// array check which side is fully sorted and take the decision based on that.
 
 	public int binarySearch(int[] arr, int key) {
 		int low = 0;
@@ -74,16 +74,18 @@ public class BinarySearch {
 		while (low <= high) {
 			int mid = low + (high - low) / 2;
 
-			if (arr[mid] == key)
+			if (arr[mid] == key) {
 				return mid;
-			// left half is sorted
+			}
 			else if (arr[low] <= arr[mid]) {
+				// Left half is sorted
 				// If key is in the range of left sorted half
 				if (key >= arr[low] && key < arr[mid])
 					high = mid - 1;
 				else
 					low = mid + 1;
-			} else { // right half is sorted
+			} else {
+				// Right half is sorted
 				// If key is in the range of the right sorted half
 				if (key <= arr[high] && key > arr[mid])
 					low = mid + 1;
