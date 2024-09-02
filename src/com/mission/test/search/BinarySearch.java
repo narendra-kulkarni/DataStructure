@@ -38,6 +38,7 @@ public class BinarySearch {
 		return -1;
 	}
 
+	// Finding no. of rotations is similar to the finding index of the minimum element in the array
 	public int findNumberOfRotations(int[] arr) {
 		int low = 0;
 		int high = arr.length - 1;
@@ -77,16 +78,15 @@ public class BinarySearch {
 			if (arr[mid] == key) {
 				return mid;
 			}
-			else if (arr[low] <= arr[mid]) {
-				// Left half is sorted
-				// If key is in the range of left sorted half
+
+			if (arr[low] <= arr[mid]) {
+				// Left half is sorted, check if key is in the range of left sorted half
 				if (key >= arr[low] && key < arr[mid])
 					high = mid - 1;
 				else
 					low = mid + 1;
 			} else {
-				// Right half is sorted
-				// If key is in the range of the right sorted half
+				// Right half is sorted, check if key is in the range of the right sorted half
 				if (key <= arr[high] && key > arr[mid])
 					low = mid + 1;
 				else
