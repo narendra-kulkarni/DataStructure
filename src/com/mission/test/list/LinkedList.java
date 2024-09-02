@@ -86,30 +86,58 @@ public class LinkedList {
 	}
 
 	public Node reverseKNodes(Node head, int k) {
-		Node current = head;
-		Node next = null;
-		Node prev = null;
-
-		int count = 0;
-
-		/* Reverse first k nodes of linked list */
-		while (count < k && current != null) {
-			next = current.next;
-			current.next = prev;
-			prev = current;
-			current = next;
-			count++;
+		if (head == null || k <= 1) {
+			return head;
 		}
 
-		/*
-		 * next is now a pointer to (k+1)th node Recursively call for the list
-		 * starting from current and make rest of the list as next of first node
-		 */
-		if (next != null)
-			head.next = reverseKNodes(next, k);
+		Node prevGroupEnd = null;
+		Node newHead = null;
+		Node current = head;
 
-		// prev is now head of input list
-		return prev;
+		while (current != null) {
+			Node groupStart = current;
+
+			// Check if there are at least k nodes left in the list
+			int count = 0;
+			while (count < k && current != null) {
+				current = current.next;
+				count++;
+			}
+
+			// If we have fewer than k nodes, connect the previous group and exit
+			if (count < k) {
+				if (prevGroupEnd != null) {
+					prevGroupEnd.next = groupStart;
+				}
+				break;
+			}
+
+			// Reverse the current group
+			Node prev = null;
+			Node curr = groupStart;
+			for (int i = 0; i < k; i++) {
+				Node nextNode = curr.next;
+				curr.next = prev;
+				prev = curr;
+				curr = nextNode;
+			}
+
+			// If this is the first group, set the new head
+			if (newHead == null) {
+				newHead = prev;
+			}
+
+			// Connect the previous group with the current group
+			if (prevGroupEnd != null) {
+				prevGroupEnd.next = prev;
+			}
+
+			// Move to the next group
+			prevGroupEnd = groupStart;
+			groupStart.next = current;
+		}
+
+		return newHead == null ? head : newHead;
 	}
 
 	/***********************************************************/
