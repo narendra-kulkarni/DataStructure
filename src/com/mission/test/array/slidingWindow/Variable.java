@@ -60,6 +60,8 @@ public class Variable {
         for (int right = 0, left = 0; right < s.length(); right++) {
             char currentChar = s.charAt(right);
             if (charMap.containsKey(currentChar)) {
+                // Math.max is needed to avoid a repeating character that is
+                // already outside our current window.
                 left = Math.max(charMap.get(currentChar) + 1, left);
             }
             charMap.put(currentChar, right);
