@@ -1,0 +1,44 @@
+When to Use <=:
+You typically use left <= right when the search space is fully closed, and you want to include
+both the left and right bounds in your search. For example, when searching for an exact match or
+when you want to keep checking the middle until you find the target.
+
+When to Use <:
+You use left < right when the search space is half-open (meaning the right is excluded), and you
+stop when left == right. This is commonly used in cases where you're narrowing down a search space
+to a single element, like in finding an insertion point or in optimization problems where you want
+to minimize or maximize something (e.g., find the smallest or largest index satisfying a condition).
+
+Example Comparison:
+
+left <= right:
+---------------
+while left <= right:  # Both ends are included in the search
+    mid = (left + right) // 2
+    if arr[mid] == target:
+        return mid  # Exact match found
+    elif arr[mid] < target:
+        left = mid + 1
+    else:
+        right = mid - 1
+
+This is a typical exact match search, checking every potential index between left and right.
+
+left < right:
+--------------
+
+while left < right:  # Right is excluded from the search
+    mid = (left + right) // 2
+    if arr[mid] < target:
+        left = mid + 1
+    else:
+        right = mid  # Narrowing down the search space
+
+Here, right is excluded from the range, and you're narrowing down the search to the point
+where left == right, which could be used for things like finding the smallest/largest index
+that satisfies a condition, rather than an exact match.
+
+Key Takeaway:
+- If you want to check both ends of the range explicitly (exact match search), you use <=.
+- If you're looking to narrow down to a single point or optimize (such as finding an index
+  where a condition holds), you use <
