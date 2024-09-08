@@ -39,6 +39,21 @@ where left == right, which could be used for things like finding the smallest/la
 that satisfies a condition, rather than an exact match.
 
 Key Takeaway:
-- If you want to check both ends of the range explicitly (exact match search), you use <=.
-- If you're looking to narrow down to a single point or optimize (such as finding an index
-  where a condition holds), you use <
+---------------------------
+The choice between these two versions depends on your specific use case:
+
+Use left < right when:
+- You need to find an insertion point.
+- You're dealing with a range that might not contain the target.
+- You want to implement a lower_bound or upper_bound function.
+
+lower_bound:
+The lower_bound function finds the first element in a sorted array that is greater than or equal to a given value.
+upper_bound:
+The upper_bound function finds the first element in a sorted array that is strictly greater than a given value.
+
+
+Use left <= right when:
+- You're searching for an exact match.
+- You want to return the index of the found element (or -1 if not found).
+- You're implementing a traditional binary search.
