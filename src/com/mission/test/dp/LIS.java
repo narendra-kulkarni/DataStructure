@@ -18,13 +18,12 @@ public class LIS {
 		// Calculate the values in the bottom up manner
 		for (int i = 1; i < arr.length; i++) {
 			for (int j = 0; j < i; j++) {
-				if (arr[j] < arr[i] && memo[i] < memo[j] + 1)
+				if (arr[j] < arr[i] && memo[i] < memo[j] + 1) {
 					memo[i] = memo[j] + 1;
+				}
 			}
 
-			if (memo[i] > max) {
-				max = memo[i];
-			}
+			max = Math.max(max, memo[i]);
 		}
 
 		return max;
