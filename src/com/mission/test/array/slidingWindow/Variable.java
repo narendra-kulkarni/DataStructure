@@ -6,13 +6,11 @@ import java.util.Map;
 // Type 2: Problems in which window size is not specified.
 public class Variable {
 
-
     // Result & window State initialization
     // Main Window loop -> move right
     // consider new element and update state
     // if min window : while window is valid, loop to "calculate result and shrink" (since shrink is desirable)
     // if max window: while window is invalid, loop to shrink. calculate result outside once it is valid again
-
 
     public int longestUniqueSubstring(String s) {
         if (s == null || s.isEmpty())
