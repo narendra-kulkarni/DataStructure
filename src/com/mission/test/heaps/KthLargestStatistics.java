@@ -24,7 +24,7 @@ public class KthLargestStatistics {
 
 	// If the size of the heap is less than k, then add the number in the heap. If the size is equal to
 	// or greater than k, then check whether the given number is greater than the current root of the heap.
-	// If yes, remove the root and add the new number in the heap. This operation gets performed in O(logn)
+	// If yes, remove the root and add the new number in the heap. This operation gets performed in O(log k)
 	public void addToStream(int num) {
 		if (minHeap.size() < k)
 			minHeap.offer(num);
