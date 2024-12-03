@@ -1,0 +1,8 @@
+if N is the size of the array
+
+Count of Sub-arrays = (N) * (N + 1)
+                     ---------------
+                            2
+
+
+Count of subsequences = 2 raised to N
