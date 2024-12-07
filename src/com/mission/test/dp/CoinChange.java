@@ -1,24 +1,23 @@
 package com.mission.test.dp;
 
+import java.util.Arrays;
+
 public class CoinChange {
 
-	public int getMinCoins(int[] denom, int val) {
-		int[] table = new int[val + 1];
+	public int getMinCoins(int[] coins, int amount) {
+		int[] table = new int[amount + 1];
+		Arrays.fill(table, Integer.MAX_VALUE);
 		table[0] = 0;
-		for (int i = 1; i <= val; i++)
-			table[i] = Integer.MAX_VALUE;
 
-		for (int i = 1; i <= val; i++) {
-			for (int j = 0; j < denom.length; j++) {
-				if (denom[j] <= i) {
-					int sub_res = table[i - denom[j]];
-					if (sub_res != Integer.MAX_VALUE && sub_res + 1 < table[i])
-						table[i] = sub_res + 1;
+		for (int i = 1; i <= amount; i++) {
+			for (int coin : coins) {
+				if (coin <= i && table[i - coin] != Integer.MAX_VALUE) {
+					table[i] = Math.min(table[i], table[i - coin] + 1);
 				}
 			}
 		}
 
-		return table[val];
+		return table[amount] == Integer.MAX_VALUE ? -1 : table[amount];
 	}
 
 	public static void main(String[] args) {
