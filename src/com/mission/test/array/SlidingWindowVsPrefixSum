@@ -1,0 +1,38 @@
+
+| Property                                 | Sliding Window   | Prefix Sum + HashMap |
+| ---------------------------------------- | ---------------- | -------------------- |
+| Monotonic constraint                     | ✅ required       | ❌ not needed         |
+| Handles negative numbers                 | ❌ usually breaks | ✅                    |
+| Handles equality (`==`)                  | ❌                | ✅                    |
+| Find longest / count with `≤ k` or `≥ k` | ✅                | ❌                    |
+| Find longest / count with `== k`         | ❌                | ✅                    |
+| At most K type constraints               | ✅                | ❌                    |
+| Exactly K type constraints               | ❌                | ✅                    |
+
+When you see a subarray problem, ask: Does expanding the window move the condition in only one direction?
+
+If YES → sliding window
+If NO → prefix sum
+
+Step 1:
+-------
+Are all numbers non-negative?
+    If NO → sliding window probably fails → use prefix sums.
+    If YES → go to Step 2.
+
+Step 2:
+-------
+Is the condition:
+    ≤ k
+    ≥ k
+    at most k
+    at least k
+→ sliding window.
+
+If the condition is:
+    == k
+    exactly k
+    balanced
+    equal counts
+→ prefix sum.
+
